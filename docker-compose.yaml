@@ -59,9 +59,6 @@ services:
     networks:
       - my-net
 
-  documentation:
-    image: pseudomuto/protoc-gen-doc
-
 networks:
   my-net:
     driver: bridge
