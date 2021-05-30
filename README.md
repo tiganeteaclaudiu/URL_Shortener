@@ -34,7 +34,7 @@ docker-compose up
 
 A single host is exposed (`localhost:40`), services should be accessible via:
 
-- `/api` for GRPC calls
+- `/` for GRPC calls, proxied to GRPC service based on content type
 - `/<shortenedURLkey>` for redirecting to previously shortened URL (Ex. key: `nlkajsXsakPP`)
 - `/ui` for accessing GRPC UI instance (if enabled via the `--profile testing` parameter on `docker-compose up`)
 - `/docs/` for accessing GRPC service documentation
