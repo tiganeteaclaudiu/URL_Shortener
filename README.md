@@ -64,7 +64,9 @@ https://redis.io/topics/persistence
 
 For backup, `.rdb` file generated on Redis backup can be found withing docker volume created for Redis service.
 
+## GRPC Service Documentation
 
+##### See `DOCS.md` file for documentation generated based on `.proto` file.
 
 
 
