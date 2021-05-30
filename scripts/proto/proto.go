@@ -23,5 +23,18 @@ func main() {
 	err := cmd.Run()
 	if err != nil {
 		log.Fatalf(fmt.Sprint(err) + ": " + stderr.String())
+		return
+	}
+
+	// generate documentation Markdown file
+	cmd = exec.Command(
+		"protoc", "--doc_out=urlshortener/docs", "--doc_opt=markdown,docs.md", "urlshortener/service.proto",
+	)
+	cmd.Dir = "./../.."
+	cmd.Stderr = &stderr
+	cmd.Stdout = os.Stdout
+	err = cmd.Run()
+	if err != nil {
+		log.Fatalf(fmt.Sprint(err) + ": " + stderr.String())
 	}
 }
