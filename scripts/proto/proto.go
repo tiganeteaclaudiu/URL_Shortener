@@ -28,7 +28,7 @@ func main() {
 
 	// generate documentation Markdown file
 	cmd = exec.Command(
-		"protoc", "--doc_out=urlshortener/docs", "--doc_opt=markdown,docs.md", "urlshortener/service.proto",
+		"protoc", "--doc_out=urlshortener", "--doc_opt=markdown,DOCS.md", "urlshortener/service.proto",
 	)
 	cmd.Dir = "./../.."
 	cmd.Stderr = &stderr
