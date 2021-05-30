@@ -4,7 +4,7 @@
 Services ran using `docker-compose`:
 
 - **GRPC** Service which handles CRUD operations for URL Shortening
-- **HTTP* Service using multiplexing to handle HTTP requests on different import, but same `go` instance
+- **HTTP** Service using multiplexing to handle HTTP requests on different import, but same `go` instance
 - **Redis** instance, configurable using `redis.conf` file
 - **Nginx** reverse proxy, used to handle all incoming requests on a single port and interface
 - Optional: **GRPC UI** instance which acts as a playground for the GRPC Service
