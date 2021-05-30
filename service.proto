@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "jobtome.com/urlshortener";
+
+// Represents an empty return
+message Void {};
+
+// Represents an accessible URL.
+// Used as either input or output of rpc calls which receive/return URLs
+message Url {
+  // Full URL (Ex. https://facebook.com)
+  string Url = 1;
+}
+
+// Represents a shortened URL key (a sequence of n length of random letters)
+// Is used as suffix for shortened URLs
+message Key {
+  // Represents the key of a shortened URL (EX. localhost:40/<lkjhbalsjdhbl>,  key between <>)
+  string Key = 1;
+}
+
+// input used for SetShortenedUrl rpc method
+message SetShortenedUrlInput {
+  // URL to be shortened
+  string Url = 1;
+  // Expiry time in minutes for entry
+  // If a 0 value is given, the entry will be persistent.
+  int64 ExpiryMinutes = 2;
+}
+
+// UrlShortenerService represents the service for handling url shortening (CRUD).
+// Service uses Redis to cache and store results.
+service UrlShortenerService {
+  // Gets an already existing shortened URL by it's key (EX. localhost:40/<lkjhbalsjdhbl>, key between <>)
+  rpc GetShortenedUrl (Key) returns (Url);
+  // Creates a new shortened URL and returns it as an accessible path
+  rpc SetShortenedUrl (SetShortenedUrlInput) returns (Url);
+  // Deletes an already existing shortened URL by it's key (EX. localhost:40/<lkjhbalsjdhbl>, key between <>)
+  rpc DeleteShortenedUrl (Key) returns (Void);
+};

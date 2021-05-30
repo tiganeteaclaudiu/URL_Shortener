@@ -1,0 +1,19 @@
+
+ò
+service.protoproto"
+Void"
+Url
+Url (	RUrl"
+Key
+Key (	RKey"N
+SetShortenedUrlInput
+Url (	RUrl$
+ExpiryMinutes (RExpiryMinutes2«
+UrlShortenerService)
+GetShortenedUrl
+.proto.Key
+.proto.Url:
+SetShortenedUrl.proto.SetShortenedUrlInput
+.proto.Url-
+DeleteShortenedUrl
+.proto.Key.proto.VoidBZjobtome.com/urlshortenerbproto3

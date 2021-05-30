@@ -1,0 +1,67 @@
+version: "3.6"
+services:
+  redis:
+    image: redis
+    container_name: cache
+    command: --port ${REDIS_PORT:-6379}
+    ports:
+      - "${REDIS_PORT:-6379}:${REDIS_PORT:-6379}"
+    expose:
+      - ${REDIS_PORT:-6379}
+    networks:
+      - my-net
+    volumes:
+#      Use redisDB persistence, configured unted redis.conf
+      - ./redis-volume:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+
+  goservice:
+    build: "."
+    ports:
+      - ${SERVICE_PORT:-4040}
+    environment:
+      - REDIS_URL=${REDIS_URL:-redis:6379}
+      - PROXY_URL=${PROXY_URL:-localhost:40}
+      - ENABLE_GRPC_UI=${ENABLE_GRPC_UI:-yes}
+      - EXPOSE_DOCS=${EXPOSE_DOCS:-yes}
+    networks:
+      - my-net
+    links:
+      - "redis"
+    depends_on:
+      - "redis"
+
+  nginx:
+    build: "./nginx"
+    ports:
+      - "${PROXY_PORT:-40}:${PROXY_PORT:-40}"
+    depends_on:
+      - "goservice"
+    networks:
+      - my-net
+
+  redis-commander:
+#    only make redis-commander run using a testing profile for debugging purposes
+#    use "docker-compose --profile testing up" to use testing profile
+    profiles:
+      - testing
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=${REDIS_HOSTS:-local:redis:6379}
+      - PORT=${REDIS_COMMANDER_PORT:-8081}
+    ports:
+      - "${REDIS_COMMANDER_PORT:-8081}:${REDIS_COMMANDER_PORT:-8081}"
+    depends_on:
+      - "redis"
+    networks:
+      - my-net
+
+  documentation:
+    image: pseudomuto/protoc-gen-doc
+
+networks:
+  my-net:
+    driver: bridge
