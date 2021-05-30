@@ -13,22 +13,22 @@ Services ran using `docker-compose`:
 
 ### Setup and running
 
-#####Requirements:
+##### Requirements:
 
 - Docker: https://docs.docker.com/get-docker/
 - Docker-compose (version 1.28.0 or later): https://docs.docker.com/compose/install/
 
-#####Installation (Including all optional services determined by "testing" profile):
+##### Installation (Including all optional services determined by "testing" profile):
 ```
 docker-compose --profile testing up
 ```
 
-#####Installation (Excluding optional services such as Redis Commander):
+##### Installation (Excluding optional services such as Redis Commander):
 ```
 docker-compose up
 ```
 
-#####Reverse proxy should listen to port `40`.
+##### Reverse proxy should listen to port `40`.
 
 ### Usage
 
