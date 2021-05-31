@@ -34,10 +34,20 @@ docker-compose up
 
 A single host is exposed (`localhost:40`), services should be accessible via:
 
-- `/` for GRPC calls, proxied to GRPC service based on content type
+- `/api` for GRPC calls, proxied to GRPC service based on content type
 - `/<shortenedURLkey>` for redirecting to previously shortened URL (Ex. key: `nlkajsXsakPP`)
 - `/ui` for accessing GRPC UI instance (if enabled via the `--profile testing` parameter on `docker-compose up`)
 - `/docs/` for accessing GRPC service documentation
+
+### First Steps
+
+You can play around with the GPRC UI found at `localhost:40/ui`, which allows executing all of the methods offered by the GRPC service.
+
+Example:
+
+- Call `SetShortenedUrl` with `Url = "https://facebook.com`
+- Copy and paste returned shortened URL in browser bar
+- You should be redirected to original Url ("https://facebook.com`)
 
 ### Configuration
 
