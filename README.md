@@ -30,6 +30,12 @@ docker-compose up
 
 ##### Reverse proxy should listen to port `40`.
 
+##### Generating based on protobuf definition:
+```
+go generate ./...
+```
+Command should also generate both markdown and HTML documentation.
+
 ### Usage
 
 A single host is exposed (`localhost:40`), services should be accessible via:
